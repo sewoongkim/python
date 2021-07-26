@@ -67,6 +67,13 @@ def OR(x1, x2):
     elif temp > threshold:
         return 1
 
+def XOR(x1,x2) :
+    h1 = NAND(x1,x2)
+    h2 = OR(x1,x2)
+    y = AND(h1,h2)
+    return y
+
+
 print(AND(0,0))
 print(AND(0,1))
 print(AND(1,0))
@@ -81,3 +88,26 @@ print(NAND(0,0))
 print(NAND(0,1))
 print(NAND(1,0))
 print(NAND(1,1))
+
+print("XOR")
+print(XOR(0,0))
+print(XOR(0,1))
+print(XOR(1,0))
+print(XOR(1,1))
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+def Step(x):
+    return np.array(x > 0, dtype = np.int)
+
+x = np.arange(-10.0, 10.0, 0.1)
+y = Step(x)
+
+plt.plot(x,y)
+plt.grid()
+plt.show()
+
+# y2 = Sigmoid(x)
+
+
