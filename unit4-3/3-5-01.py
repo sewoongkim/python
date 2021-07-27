@@ -110,4 +110,47 @@ plt.show()
 
 # y2 = Sigmoid(x)
 
+def Softmax(a):
+    c = np.max(a)
+    exp_a = np.exp(a-c)
+    sum_exp_a = np.sum(exp_a)
+    return exp_a/sum_exp_a
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+def Step(x):
+    return np.array(x > 0, dtype = np.int64)
+
+def Sigmoid(X):
+    return 1/(1 + np.exp(-X))
+
+def ReLU(x):
+    return np.maximum(0,x) 
+
+x = np.arange(-10.0, 10.0, 0.1)
+y = Step(x)
+
+print(y)
+X = np.array([0.1,0.2])
+
+W1 = np.array([[1,2,3],[4,5,6]])
+B1 = np.array([1,2,3])
+
+A1 = np.dot(X, W1) + B1
+Z1 = Sigmoid(A1)
+
+print(A1)
+print(Z1)
+print(X.shape, W1.shape, B1.shape, A1.shape)
+
+W2 = np.array([[1,2],[3,4],[5,6]])
+B2 = np.array([-1,1])
+
+A2 = np.dot(Z1,W2) + B2
+Y = Softmax(A2)
+
+print(A2)
+print(Y)
+print(Z1.shape, W2.shape, B2.shape, A2.shape)
 
