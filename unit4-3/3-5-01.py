@@ -154,3 +154,54 @@ print(A2)
 print(Y)
 print(Z1.shape, W2.shape, B2.shape, A2.shape)
 
+class my_NN01:
+
+    def __init__(self, input_nodes, hidden_nodes, output_nodes, learning_rate):
+        self.input_nodes = input_nodes
+        self.hidden_nodes = hidden_nodes 
+        self.output_nodes = output_nodes
+
+        self.W1 = np.random.rand(self.input_nodes, self.hidden_nodes) / np.sqrt(self.input_nodes/2)
+        self.B1 = np.random.rand(self.hidden_nodes)
+
+        self.W2 = np.random.rand(self,hidden_nodes, self.output_nodes) / np.sqrt(self.hidden_nodes/2)
+        self.B2 = np.random(self.output_nodes)
+
+        self.learning_rate = learning_rate
+
+    def feed_forward(self):
+        delta = 1e-7
+        A1 = np.dot(self.input_data, self.W1) + self.B1
+        Z1 = Sigmoid(A1)
+
+        A2 = np.dot(Z1, self.W2) + self.B2
+        y = Sigmoid(A2)
+
+        return - np.sum(self.target_data * np.log(1-self.target_data) * np.log((1-y) + delta))
+    
+    def cost(self) :
+        delta = 1e-7
+        A1 = np.dot(self.input_data, self.W1) + self.B1
+        Z1 = Sigmoid(A1)
+        A2 = np.dot(Z1, self.W2) + self.B2
+        y = Sigmoid(A2)
+
+        cost_val = -np.sum(self.target_data * np.log(y + delta) + (1-self.target_data) * np.log((1-y) +delta))
+        return cost_val
+
+    def train(self, input_data, target_data):
+        self.input_data = input_data
+        self.target_data = target_data
+        f = lambda x: self.feed_foward()
+        self.W1 -= self.learning_rate * numerical_derivative(f, self.W1)
+        self.B1 -= self.learning_rate * numerical_derivative(f, self.B1)
+        self.W2 -= self.learning_rate * numerical_derivative(f, self.W2)
+        self.B2 -= self.learning_rate * numerical_derivative(f, self.B2)
+    
+    def Add(num1, num2):
+        return num1 + num2 
+    
+    print(Add(1+2))
+
+
+
