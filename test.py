@@ -50,12 +50,19 @@ for e in range(EPOCHS):
     random.seed(e)
     r = random.choices(LEVELS, WEIGHTS, k=TOTAL)
     sr = pd.Series(r)
+    # print(sr)
     for l in LEVELS:
         kk = sr[sr == l]
+        # print(kk)
         dd = kk.reset_index()['index'].to_frame()
+        # print(dd)
         dd = dd.assign(lag=dd['index'].shift(1))
+        # print("QQQQQQQQQQQ")
+        # print(dd)
         dd = dd.assign(dif=dd['index'] - dd['lag'])
         ml = dd.dif.max()
+        # print("MAX")
+        # print(ml)
         dif = int(ml - MAXLENS[l])
         rate = dif / MAXLENS[l]
         res = 'PASS' if dif <= 0 else f'FAIL (+{dif}, {rate:.2f})'
